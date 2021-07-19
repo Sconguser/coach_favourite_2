@@ -4,6 +4,8 @@ import 'package:coach_favourite/shared/validators.dart';
 import 'package:coach_favourite/services/authorization.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:coach_favourite/screens/loading.dart';
+
 
 class SignIn extends StatefulWidget {
   @override
@@ -39,7 +41,7 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isVisibleLoading? Loading():Scaffold(
         backgroundColor: greyo,
         body: Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -52,7 +54,7 @@ class _SignInState extends State<SignIn> {
                     children: [
                       Image.asset('assets/images/logo.png', width:100, height: 100,),
                       Text('COACH FAVOURITE', style:titleFont.copyWith(fontSize:40),textAlign: TextAlign.center,),
-                      SizedBox(height:50),
+                      SizedBox(height:47),
                       TextFormField(
                         validator: (value) {
                           if(email.isNotEmpty) value = email;
@@ -66,7 +68,7 @@ class _SignInState extends State<SignIn> {
                           });
                         },
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 18),
                       TextFormField(
                         validator: (value) {
                           return passwordValidator(value);
@@ -100,11 +102,6 @@ class _SignInState extends State<SignIn> {
                           style: errorTextStyle,
                         ),
                         visible: isVisibleError,
-                      ),
-                      SizedBox(height: 20),
-                      Visibility(
-                        child: spinner,
-                        visible: isVisibleLoading,
                       )
                     ],
                   ),

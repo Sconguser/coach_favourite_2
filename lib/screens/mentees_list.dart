@@ -1,4 +1,5 @@
 import 'package:coach_favourite/models/mentee.dart';
+import 'package:coach_favourite/screens/loading.dart';
 import 'package:coach_favourite/services/authorization.dart';
 import 'package:coach_favourite/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,25 @@ class MenteesList extends StatefulWidget {
 
 class _MenteesListState extends State<MenteesList> {
 
-
+  bool isVisibleLoading = false;
   @override
+
+  void initState(){
+    super.initState();
+    _load();
+  }
+
+  Future<Null>_load()async{
+    setState(() {
+      isVisibleLoading = true;
+    });
+    await Provider.of<MenteeProvider>(context,listen:false)
+        .getMentees(Provider.of<AuthorizationProvider>(context,listen:false)
+        .user.bearerToken);
+    setState(() {
+      isVisibleLoading = false;
+    });
+  }
 
   Widget build(BuildContext context) {
     timeDilation=1.0;
@@ -25,7 +43,7 @@ class _MenteesListState extends State<MenteesList> {
     var auth = Provider.of<AuthorizationProvider>(context,listen:false);
     var reportProvider = Provider.of<ReportProvider>(context,listen:false);
     List<Mentee> mentees = menteeProvider.mentees;
-    return Scaffold(
+    return isVisibleLoading?Loading():Scaffold(
       appBar: AppBar(
       ),
       body: Container(
@@ -46,7 +64,6 @@ class _MenteesListState extends State<MenteesList> {
                         child: InkWell(
                           onTap:()async {
                             menteeProvider.setFocusedMentee = mentee;
-                            await reportProvider.getMenteeReports(auth.user.bearerToken, mentee.id);
                             await Navigator.pushNamed(context,'/mentee_detail');
                             setState(() {
 
@@ -70,10 +87,15 @@ class _MenteesListState extends State<MenteesList> {
               children: [
                 InkWell(
                   onTap:()async {
+                    setState(() {
+                      isVisibleLoading = true;
+                    });
                     await Provider.of<AllMenteeProvider>(context,listen:false).getMentees(auth.user.bearerToken);
                     await Navigator.pushNamed(context, '/add_mentee');
                     mentees= await menteeProvider.getMentees(auth.user.bearerToken);
-                    setState((){});
+                    setState((){
+                      isVisibleLoading = false;
+                    });
                   },
                   child: Container(
                     child: ClipRRect(

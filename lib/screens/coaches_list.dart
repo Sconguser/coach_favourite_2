@@ -1,8 +1,11 @@
 import 'package:coach_favourite/models/coach.dart';
+import 'package:coach_favourite/services/authorization.dart';
 import 'package:flutter/material.dart';
 import 'package:coach_favourite/services/coach_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:coach_favourite/shared/constants.dart';
+import 'package:coach_favourite/screens/loading.dart';
+
 
 
 class CoachesList extends StatefulWidget {
@@ -12,13 +15,31 @@ class CoachesList extends StatefulWidget {
 
 class _CoachesListState extends State<CoachesList> {
 
+  bool isVisibleLoading = false;
 
   @override
+
+  void initState(){
+    super.initState();
+    _load();
+  }
+
+  Future<Null>_load()async{
+    setState(() {
+      isVisibleLoading = true;
+    });
+    await Provider.of<CoachProvider>(context,listen:false)
+        .getCoaches(Provider.of<AuthorizationProvider>(context,listen:false)
+        .user.bearerToken);
+    setState(() {
+      isVisibleLoading = false;
+    });
+  }
 
   Widget build(BuildContext context) {
     var coachProvider = Provider.of<CoachProvider>(context,listen:false);
     List<Coach> coaches = coachProvider.coaches;
-    return Scaffold(
+    return isVisibleLoading?Loading():Scaffold(
       appBar: AppBar(
         backgroundColor: greyo,
         elevation: 0,

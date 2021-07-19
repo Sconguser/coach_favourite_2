@@ -3,7 +3,7 @@ import 'package:coach_favourite/shared/constants.dart';
 import 'package:coach_favourite/shared/validators.dart';
 import 'package:coach_favourite/services/authorization.dart';
 import 'package:provider/provider.dart';
-
+import 'package:coach_favourite/screens/loading.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -23,10 +23,8 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blueGrey,
+    return isVisibleLoading ? Loading():Scaffold(
         appBar: AppBar(
-          title: Text('Sign Up'),
         ),
         body: Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -118,9 +116,9 @@ class _SignUpState extends State<SignUp> {
                     }).toList(),
                   ),
 
-                  ElevatedButton(
+                  OutlinedButton(
                       onPressed: _signUpButton,
-                      child: Text('Sign up')),
+                      child: Text('SIGN UP', style: titleFont.copyWith(fontSize: 20),)),
                   Visibility(
                     child: Text(
                       error,

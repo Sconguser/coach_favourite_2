@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:coach_favourite/services/mentee_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'constants.dart';
+
 
 showAddManteeDialog(BuildContext context, String bearerToken, int idCoach, int idMentee, String name, String lastName, String email) {
+  bool isVisibleLoading = false;
   Widget dismissButton = ElevatedButton(
     child: Text("No"),
     onPressed: () {
