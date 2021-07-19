@@ -6,7 +6,7 @@ import 'dart:async';
 
 class ReportProvider extends ChangeNotifier{
   ReportProvider();
-  Report _report= Report(id:-1, menteeId: -1,);
+  Report _report= Report(id:-1, menteeId: -1, date:'');
   Report get report =>_report;
   int _lastReportId =-1;
   int get lastReportId =>_lastReportId;
@@ -103,6 +103,7 @@ class ReportProvider extends ChangeNotifier{
         reports.forEach((report)=>
         _reportsList.add(Report.fromJson(report))
         );
+        print(_reportsList.elementAt(0).date);
         notifyListeners();
         return _reportsList;
       }

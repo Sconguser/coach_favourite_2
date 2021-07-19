@@ -19,7 +19,6 @@ class _AddMenteeState extends State<AddMentee> {
     var auth = Provider.of<AuthorizationProvider>(context,listen:false);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add a mentee'),
         ),
         body: Container(
           padding: EdgeInsets.all(10),

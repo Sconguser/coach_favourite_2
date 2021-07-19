@@ -39,19 +39,21 @@ class _CreateReportState extends State<CreateReport> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Add an image'),
+            title: Text('Add an image', textAlign: TextAlign.center, style:titleFont),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
+                  MySmallDivider(),
+                  SizedBox(height:30),
                   GestureDetector(
-                    child: Text('Gallery'),
+                    child: Text('Gallery', textAlign: TextAlign.center, style:titleFont),
                     onTap: () {
                       _openGallery(context,index);
                     },
                   ),
                   Padding(padding: EdgeInsets.all(15)),
                   GestureDetector(
-                      child: Text('Camera'),
+                      child: Text('Camera', textAlign:TextAlign.center, style:titleFont),
                       onTap: () {
                         _openCamera(context,index);
                       })
@@ -65,7 +67,7 @@ class _CreateReportState extends State<CreateReport> {
 
   Widget _decideImageView(int index){
     if(imageFile[index]==null){
-      return Card(child: Image.asset('assets/images/add_picture.png', height: 50, width: 50,));
+      return Card(child: Image.asset('assets/images/add_orango.png', height: 50, width: 50,));
     }
     else
     {
@@ -93,157 +95,179 @@ class _CreateReportState extends State<CreateReport> {
     var coaches = Provider.of<CoachProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
-          title: Text('Create a report'),
         ),
-        body: Container(
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                Text(
-                    'Insert your report information, if left empty - zero will be put'),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Calf size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        calf = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Hips size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        hips = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Belly size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        belly = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Waist size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        waist = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Chest size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        chest = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Biceps size in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        biceps = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Height in cm'),
-                    onChanged: (value) {
-                      setState(() {
-                        height = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Weight in kg'),
-                    onChanged: (value) {
-                      setState(() {
-                        weight = double.parse(value);
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Opinion on your diet'),
-                    onChanged: (value) {
-                      setState(() {
-                        dietOpinion = value;
-                      });
-                    }),
-                TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: signInInputDecoration.copyWith(
-                        hintText: 'Opinion on your workout'),
-                    onChanged: (value) {
-                      setState(() {
-                        workoutOpinion = value;
-                      });
-                    }),
-                SizedBox(height:20),
-                Text('Add photos', style: TextStyle(fontSize: 30),),
-                Center(
-                  child: Wrap(children: [
-                    for(int i =0; i<3; i++)
-                      Column(
-                        children: [
-                          MyDivider(),
-                          SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                child: _decideImageView(i),
-                                onTap: () {
-                                  _showChoiceDialog(context, i);
-                                },
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  TextFormField(
+                      keyboardType: TextInputType.number,
+                      style:TextStyle(fontSize: 20),
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Calf size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          calf = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Hips size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          hips = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Belly size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          belly = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Waist size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          waist = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Chest size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          chest = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Biceps size in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          biceps = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Height in cm'),
+                      onChanged: (value) {
+                        setState(() {
+                          height = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      style:TextStyle(fontSize: 20),
+                      keyboardType: TextInputType.number,
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Weight in kg'),
+                      onChanged: (value) {
+                        setState(() {
+                          weight = double.parse(value);
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      minLines:1,
+                      maxLines:null,
+                      style:TextStyle(fontSize: 20),
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Opinion on your diet'),
+                      onChanged: (value) {
+                        setState(() {
+                          dietOpinion = value;
+                        });
+                      }),
+                  SizedBox(height:20),
+                  TextFormField(
+                      minLines: 1,
+                      maxLines:null,
+                      style:TextStyle(fontSize: 20),
+                      decoration: signInInputDecoration.copyWith(
+                          hintText: 'Opinion on your workout'),
+                      onChanged: (value) {
+                        setState(() {
+                          workoutOpinion = value;
+                        });
+                      }),
+                  SizedBox(height:20),
+                  Text('Add photos', style: TextStyle(fontSize: 30, color:orango,),textAlign: TextAlign.center,),
+                  SizedBox(height:20),
+                  MySmallDivider(),
+                  SizedBox(height:50),
+                  Center(
+                    child: Wrap(children: [
+                      for(int i =0; i<3; i++)
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              height: 200,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  child: _decideImageView(i),
+                                  onTap: () {
+                                    _showChoiceDialog(context, i);
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height:20)
-                        ],
-                      ),
-                  ]),
-                ),
-                ElevatedButton(
-                    onPressed: () async {
-                      int reportId = await reportProvider.createReport(
-                          auth.user.bearerToken,
-                          auth.user.id,
-                          calf,
-                          hips,
-                          belly,
-                          waist,
-                          chest,
-                          biceps,
-                          weight,
-                          height,
-                          dietOpinion,
-                          workoutOpinion);
-                      if (reportId == -1) {
-                        print('nie udalo sie'); ///// do dodania error!!!1
-                      } else {
-                        await coaches.getCoaches(auth.user.bearerToken);
-                        await Navigator.pushNamed(context, '/select_coaches');
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text('Create report!'))
-              ],
+                            SizedBox(height:20)
+                          ],
+                        ),
+                    ]),
+                  ),
+                  OutlinedButton(
+                      onPressed: () async {
+                        int reportId = await reportProvider.createReport(
+                            auth.user.bearerToken,
+                            auth.user.id,
+                            calf,
+                            hips,
+                            belly,
+                            waist,
+                            chest,
+                            biceps,
+                            weight,
+                            height,
+                            dietOpinion,
+                            workoutOpinion);
+                        if (reportId == -1) {
+                          print('nie udalo sie'); ///// do dodania error!!!1
+                        } else {
+                          await coaches.getCoaches(auth.user.bearerToken);
+                          await Navigator.pushNamed(context, '/select_coaches');
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text('Create a report!', style:titleFont.copyWith(fontSize:20)))
+                ],
+              ),
             ),
           ),
         ));

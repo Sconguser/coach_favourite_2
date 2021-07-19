@@ -40,17 +40,7 @@ class _SignInState extends State<SignIn> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[900],
-        /*appBar: AppBar(
-          title: Text('Sign In'),
-          actions: [
-            TextButton.icon(
-              icon: Icon(Icons.how_to_reg, color: Colors.white),
-              label: Text('Register', style: TextStyle(color: Colors.white)),  /// przesunac przycisk do rejestracji
-              onPressed: () => Navigator.pushNamed(context, '/sign_up'),
-            )
-          ],
-        ),*/
+        backgroundColor: greyo,
         body: Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Form(
@@ -100,6 +90,10 @@ class _SignInState extends State<SignIn> {
                       ),
                       OutlinedButton(
                           onPressed: _signInButton, child: Text('SIGN IN', style: titleFont.copyWith(fontSize:20))),
+                      OutlinedButton(
+                          onPressed: () => Navigator.pushNamed(context, '/sign_up'),
+                        child:Text('SIGN UP', style:titleFont.copyWith(fontSize:15))
+                      ),
                       Visibility(
                         child: Text(
                           error,

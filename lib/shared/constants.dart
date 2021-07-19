@@ -20,6 +20,7 @@ const enormousFont = TextStyle(
   fontSize: 50,
 );
 const Color orango = Color(0xFFF9A825);
+const Color greyo = Color(0xFFF212121);
 const signInInputDecoration = InputDecoration(
   hintStyle:hintFont,
   /*enabledBorder:UnderlineInputBorder(

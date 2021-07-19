@@ -22,7 +22,6 @@ class _MenteeDetailState extends State<MenteeDetail> {
     Mentee mentee = menteeProvider.focusedMentee;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Mentee details'),
           actions: [
             IconButton(
                 iconSize: 40,
@@ -34,11 +33,11 @@ class _MenteeDetailState extends State<MenteeDetail> {
                 icon: Icon(Icons.delete_forever))
           ],
         ),
-        body: Column(
+        body: ListView(
           children: [
             Container(
               width: 400,
-              height: 370,
+              height: 400,
               padding: EdgeInsets.all(30),
               child: Column(
                 children: [
@@ -53,19 +52,20 @@ class _MenteeDetailState extends State<MenteeDetail> {
                       ),
                     ),
                   ),
-                  Text(mentee.name, style: bigFont),
-                  Text(mentee.lastName, style: bigFont),
+                  Text(mentee.name, style: titleFont.copyWith(fontSize:30)),
+                  Text(mentee.lastName, style: titleFont.copyWith(fontSize:30)),
                 ],
               ),
             ),
             SizedBox(
-              height: 350,
+              height: 200,
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: reportsList.length,
                 itemBuilder: (BuildContext context, int index) => Card(
+                  elevation: 20,
                     child: SizedBox(
                   width: 200,
                   child: InkWell(
@@ -75,20 +75,9 @@ class _MenteeDetailState extends State<MenteeDetail> {
                     child: Container(
                       padding:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      child: Column(children: [
-                        Center(
-                          child: Text(
-                              'Calf: ${reportsList.elementAt(index).calf.toString()}'),
-                        ),
-                        Center(
-                          child: Text(
-                              'Biceps: ${reportsList.elementAt(index).biceps.toString()}'),
-                        ),
-                        Center(
-                          child: Text(
-                              'Height: ${reportsList.elementAt(index).height.toString()}'),
-                        ),
-                      ]),
+                      child: Center(
+                        child: Text(reportsList.elementAt(index).date.substring(0,10), style: titleFont.copyWith(fontSize:25),),
+                      ),
                     ),
                   ),
                 )),
@@ -96,5 +85,8 @@ class _MenteeDetailState extends State<MenteeDetail> {
             )
           ],
         ));
+  }
+  String truncateTime(String time){
+    return (time.split("T")[1]).split(":")[0]+':'+(time.split("T")[1]).split(":")[1];
   }
 }

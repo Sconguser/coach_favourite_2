@@ -20,14 +20,10 @@ class _MenuState extends State<Menu> {
     var provider = Provider.of<AuthorizationProvider>(context, listen: false);
     return Scaffold(
       key:scaffoldKey,
-      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        elevation: 0,
         leading: IconButton(icon:Icon(Icons.dehaze_rounded, color: orango, size:40), onPressed: (){
           scaffoldKey.currentState!.openDrawer();
           setState(() {
-
           });
         },),
       ),

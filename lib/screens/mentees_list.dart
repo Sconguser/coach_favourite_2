@@ -1,5 +1,6 @@
 import 'package:coach_favourite/models/mentee.dart';
 import 'package:coach_favourite/services/authorization.dart';
+import 'package:coach_favourite/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:coach_favourite/services/mentee_provider.dart';
 import 'package:flutter/scheduler.dart';
@@ -26,7 +27,6 @@ class _MenteesListState extends State<MenteesList> {
     List<Mentee> mentees = menteeProvider.mentees;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mentees list'),
       ),
       body: Container(
         width: 400,
@@ -35,33 +35,36 @@ class _MenteesListState extends State<MenteesList> {
         child: Wrap(
           children: [
             for (var mentee in mentees)
-              Column(
-                children: [
-                  Hero(
-                    tag:'cat${mentee.id}',
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap:()async {print('klikniete!');
-                          menteeProvider.setFocusedMentee = mentee;
-                          await reportProvider.getMenteeReports(auth.user.bearerToken, mentee.id);
-                          await Navigator.pushNamed(context,'/mentee_detail');
-                          setState(() {
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: Column(
+                  children: [
+                    Hero(
+                      tag:'cat${mentee.id}',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap:()async {
+                            menteeProvider.setFocusedMentee = mentee;
+                            await reportProvider.getMenteeReports(auth.user.bearerToken, mentee.id);
+                            await Navigator.pushNamed(context,'/mentee_detail');
+                            setState(() {
 
-                          });
-                          },
-                        child: Container(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('assets/images/Cat_${mentee.id%30+1}.png', width: 120, height: 100,),
+                            });
+                            },
+                          child: Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset('assets/images/Cat_${mentee.id%30+1}.png', width: 120, height: 100,),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(mentee.name),
-                  Text(mentee.lastName)
-                ],
+                    Text(mentee.name,style:titleFont.copyWith(fontSize: 15)),
+                    Text(mentee.lastName,style:titleFont.copyWith(fontSize: 15))
+                  ],
+                ),
               ),
             Column(
               children: [
@@ -75,11 +78,11 @@ class _MenteesListState extends State<MenteesList> {
                   child: Container(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset('assets/images/add.png', width: 120, height: 100,),
+                      child: Image.asset('assets/images/add.png', width: 110, height: 100,),
                     ),
                   ),
                 ),
-                Text('Add'),
+                Text('Add', style:TextStyle(fontSize: 15)),
               ],
             ),
           ],

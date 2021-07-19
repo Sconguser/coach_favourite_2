@@ -11,9 +11,11 @@ class Report {
   String dietOpinion;
   String workoutOpinion;
   int menteeId;
+  String date;
   Report({
     required this.id,
     required this.menteeId,
+    required this.date,
     this.calf = 0,
     this.hips = 0,
     this.belly = 0,
@@ -27,6 +29,7 @@ class Report {
   });
   factory Report.fromJson(Map<String, dynamic> body) {
     return Report(
+        date: body['created_at'],
         id: body['id'],
         menteeId: body['mentee_id'],
         calf: body['calf'],

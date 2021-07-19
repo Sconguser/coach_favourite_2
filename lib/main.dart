@@ -1,4 +1,5 @@
 import 'package:coach_favourite/services/mentee_provider.dart';
+import 'package:coach_favourite/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'shared/routes.dart';
 import 'package:provider/provider.dart';
@@ -44,9 +45,18 @@ class MyApp extends StatelessWidget {
           title: 'Coach Favourite',
           theme: ThemeData(
             primarySwatch: Colors.grey,
-            textTheme:TextTheme(bodyText1: TextStyle(color:Colors.grey)),
-            canvasColor: Colors.grey[900],
-            buttonColor: Color(0xFFF9A825),
+
+            canvasColor: greyo,
+            buttonColor: orango,
+            appBarTheme: AppBarTheme(
+                backgroundColor:greyo,
+                actionsIconTheme: IconThemeData(color:orango),
+                iconTheme: IconThemeData(color: orango),
+                elevation: 0
+            ),
+            scaffoldBackgroundColor: greyo,
+            dialogBackgroundColor: greyo,
+            cardColor: greyo,
           ),
           initialRoute: '/',
         ),

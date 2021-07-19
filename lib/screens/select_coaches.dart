@@ -1,4 +1,5 @@
 import 'package:coach_favourite/models/coach.dart';
+import 'package:coach_favourite/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:coach_favourite/services/coach_provider.dart';
 import 'package:provider/provider.dart';
@@ -24,14 +25,13 @@ class _SelectCoachesState extends State<SelectCoaches> {
     List<Coach> coaches = coachProvider.coaches;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select coaches'),
         actions: [
-          ElevatedButton(onPressed: ()async {
+          OutlinedButton(onPressed: ()async {
             if(selectedCoaches.isNotEmpty){
               await reportProvider.sendReport(auth.user.bearerToken, reportProvider.lastReportId, selectedCoaches);
               Navigator.pop(context);
             }
-          }, child: Text('Send!'))
+          }, child: Text('Send!', style: titleFont.copyWith(fontSize:25),))
         ],
       ),
       body: Container(
@@ -43,7 +43,7 @@ class _SelectCoachesState extends State<SelectCoaches> {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: selectedCoaches.contains(coach.id)? Colors.blue : Colors.white,
+                      color: selectedCoaches.contains(coach.id)? orango : greyo,
                       blurRadius: 5.0,
                       offset: Offset(0,2),
                       spreadRadius: 0.2
@@ -83,10 +83,6 @@ class _SelectCoachesState extends State<SelectCoaches> {
                   ],
                 ),
               ),
-            /*ElevatedButton(
-              onPressed: (){},
-              child: Text('Send report to selected coaches'),
-            )*/
           ],
         ),
       ),
