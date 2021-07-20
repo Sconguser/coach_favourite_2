@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "360040619956",
+    "project_id": "coach-favourite",
+    "storage_bucket": "coach-favourite.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360040619956:android:df1427ea7edc25e5c65ce1",
+        "android_client_info": {
+          "package_name": "com.example.coach_favourite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360040619956-0ktn0ahdb1db00hdjpc1mb0q32lo0pc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coach_favourite",
+            "certificate_hash": "2847d25d836320227de10df9dddd7b353eca024b"
+          }
+        },
+        {
+          "client_id": "360040619956-suq835mbja25ft4qu5dr9l5mce59m84u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkO3wEync98okj8j8R7dkfZjdVFKQOvvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360040619956-suq835mbja25ft4qu5dr9l5mce59m84u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
