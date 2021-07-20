@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'loading.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class CreateReport extends StatefulWidget {
   @override
@@ -19,21 +21,8 @@ class CreateReport extends StatefulWidget {
 class _CreateReportState extends State<CreateReport> {
   List<XFile?> imageFile = [null, null, null];
 
-  _openGallery(BuildContext context, int index) async {
-    final image = (await ImagePicker().pickImage(source: ImageSource.gallery))!;
-    this.setState(() {
-      imageFile[index] = image;
-    });
-    Navigator.of(context).pop();
-  }
 
-  _openCamera(BuildContext context, int index) async {
-    final image = (await ImagePicker().pickImage(source: ImageSource.camera))!;
-    this.setState(() {
-      imageFile[index] = image;
-    });
-    Navigator.of(context).pop();
-  }
+
 
   _changePhoto(BuildContext context, int index, ImageSource source) async {
     final image = (await ImagePicker().pickImage(source: source))!;
@@ -365,6 +354,16 @@ class _CreateReportState extends State<CreateReport> {
                             if (reportId == -1) {
                               print('nie udalo sie'); ///// do dodania error!!!1
                             } else {
+                              for(int i=0; i<3; i++){
+                                if(imageFile[i] == null) continue;
+                                try {
+                                  FirebaseStorage.instance.ref('${auth.
+                                  user.id}/$reportId/$i').putFile(File(
+                                      imageFile[i]!.path));
+                                } on FirebaseException catch(e){
+                                  throw(e);
+                                }
+                              }
                               isVisibleLoading = false;
                               await coaches.getCoaches(auth.user.bearerToken);
                               await Navigator.pushNamed(
