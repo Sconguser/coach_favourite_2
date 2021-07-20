@@ -1,3 +1,4 @@
+import 'package:coach_favourite/services/mentee_provider.dart';
 import 'package:coach_favourite/shared/constants.dart';
 import 'package:coach_favourite/shared/divider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _ReportDetailState extends State<ReportDetail> {
 
   void initState(){
     super.initState();
-    String path = '4/${Provider.of<ReportProvider>(context,listen:false).focusedReport.id}';
+    String path = '${Provider.of<MenteeProvider>(context,listen:false).focusedMentee.id}/${Provider.of<ReportProvider>(context,listen:false).focusedReport.id}';
     _loadPhotos(path);
   }
   Future<Null>_loadPhotos(String path)async{
