@@ -5,8 +5,8 @@ import 'package:coach_favourite/services/coach_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:coach_favourite/services/report_provider.dart';
 import 'package:coach_favourite/services/authorization.dart';
-
 import 'loading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class SelectCoaches extends StatefulWidget {
@@ -36,6 +36,10 @@ class _SelectCoachesState extends State<SelectCoaches> {
               });
               await reportProvider.sendReport(auth.user.bearerToken, reportProvider.lastReportId, selectedCoaches);
               Navigator.pop(context);
+              Fluttertoast.showToast(msg: 'Sent successfully');
+            }
+            else{
+              Fluttertoast.showToast(msg: "You need to select at least one coach");
             }
           }, child: Text('Send!', style: titleFont.copyWith(fontSize:25),))
         ],
