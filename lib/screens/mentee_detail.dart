@@ -7,25 +7,52 @@ import 'package:provider/provider.dart';
 import 'package:coach_favourite/services/mentee_provider.dart';
 import 'package:coach_favourite/services/report_provider.dart';
 
+import 'loading.dart';
+
 class MenteeDetail extends StatefulWidget {
   @override
   _MenteeDetailState createState() => _MenteeDetailState();
 }
 
 class _MenteeDetailState extends State<MenteeDetail> {
+
+  bool isVisibleLoading = false;
+  bool isVisibleLoadingBig = false;
   @override
+
+
+  void initState(){
+    super.initState();
+    _load();
+  }
+
+  Future<Null>_load()async{
+    setState(() {
+      isVisibleLoading = true;
+    });
+    await Provider.of<ReportProvider>(context,listen:false)
+        .getMenteeReports(Provider.of<AuthorizationProvider>(context,listen:false)
+        .user.bearerToken,Provider.of<MenteeProvider>(context,listen:false).focusedMentee.id);
+    setState(() {
+      isVisibleLoading = false;
+    });
+  }
+
   Widget build(BuildContext context) {
     var menteeProvider = Provider.of<MenteeProvider>(context, listen: false);
     var auth = Provider.of<AuthorizationProvider>(context, listen: false);
     var reportProvider = Provider.of<ReportProvider>(context, listen: false);
     List<Report> reportsList = reportProvider.reportsList;
     Mentee mentee = menteeProvider.focusedMentee;
-    return Scaffold(
+    return isVisibleLoadingBig?Loading():Scaffold(
         appBar: AppBar(
           actions: [
             IconButton(
                 iconSize: 40,
                 onPressed: () async {
+                  setState(() {
+                    isVisibleLoadingBig = true;
+                  });
                   await menteeProvider.deleteMentee(auth.user.bearerToken,
                       auth.user.id, mentee.id, mentee.id);
                   Navigator.pop(context);
@@ -57,7 +84,7 @@ class _MenteeDetailState extends State<MenteeDetail> {
                 ],
               ),
             ),
-            SizedBox(
+            isVisibleLoading?spinner:SizedBox(
               height: 200,
               child: ListView.builder(
                 physics: ClampingScrollPhysics(),

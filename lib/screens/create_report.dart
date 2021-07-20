@@ -9,6 +9,8 @@ import 'package:coach_favourite/services/coach_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'loading.dart';
+
 
 class CreateReport extends StatefulWidget {
   @override
@@ -75,7 +77,7 @@ class _CreateReportState extends State<CreateReport> {
     }
   }
 
-
+  bool isVisibleLoading = false;
   final _formKey = GlobalKey<FormState>();
   double calf = 0;
   double hips = 0;
@@ -93,7 +95,7 @@ class _CreateReportState extends State<CreateReport> {
     var reportProvider = Provider.of<ReportProvider>(context, listen: false);
     var auth = Provider.of<AuthorizationProvider>(context, listen: false);
     var coaches = Provider.of<CoachProvider>(context, listen: false);
-    return Scaffold(
+    return isVisibleLoading? Loading():Scaffold(
         appBar: AppBar(
         ),
         body: SafeArea(
@@ -244,6 +246,9 @@ class _CreateReportState extends State<CreateReport> {
                   ),
                   OutlinedButton(
                       onPressed: () async {
+                        setState(() {
+                          isVisibleLoading = true;
+                        });
                         int reportId = await reportProvider.createReport(
                             auth.user.bearerToken,
                             auth.user.id,
@@ -260,6 +265,7 @@ class _CreateReportState extends State<CreateReport> {
                         if (reportId == -1) {
                           print('nie udalo sie'); ///// do dodania error!!!1
                         } else {
+                          isVisibleLoading = false;
                           await coaches.getCoaches(auth.user.bearerToken);
                           await Navigator.pushNamed(context, '/select_coaches');
                           Navigator.pop(context);

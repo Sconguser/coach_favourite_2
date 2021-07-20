@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:coach_favourite/services/report_provider.dart';
 import 'package:coach_favourite/services/authorization.dart';
 
+import 'loading.dart';
+
 
 class SelectCoaches extends StatefulWidget {
   @override
@@ -14,6 +16,7 @@ class SelectCoaches extends StatefulWidget {
 
 class _SelectCoachesState extends State<SelectCoaches> {
 
+  bool isVisibleLoading = false;
   List<int>selectedCoaches=[];
   @override
 
@@ -23,11 +26,14 @@ class _SelectCoachesState extends State<SelectCoaches> {
     var auth = Provider.of<AuthorizationProvider>(context,listen:false);
 
     List<Coach> coaches = coachProvider.coaches;
-    return Scaffold(
+    return isVisibleLoading? Loading():Scaffold(
       appBar: AppBar(
         actions: [
           OutlinedButton(onPressed: ()async {
             if(selectedCoaches.isNotEmpty){
+              setState(() {
+                isVisibleLoading = true;
+              });
               await reportProvider.sendReport(auth.user.bearerToken, reportProvider.lastReportId, selectedCoaches);
               Navigator.pop(context);
             }

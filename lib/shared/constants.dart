@@ -41,8 +41,8 @@ const errorTextStyle = TextStyle(
 
 
 final spinner = SpinKitFoldingCube(
-  color:Colors.black12,
-  size: 50,
+  color:orango,
+  size: 60,
 );
 const titleFont = TextStyle(
   fontFamily: 'Alfa Slab One',

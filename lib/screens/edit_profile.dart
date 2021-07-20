@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:coach_favourite/services/authorization.dart';
 import 'package:coach_favourite/shared/constants.dart';
 
+import 'loading.dart';
+
 
 class EditProfile extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     var auth = Provider.of<AuthorizationProvider>(context,listen:false);
-    return Scaffold(
+    return isVisibleLoading?Loading():Scaffold(
       appBar:AppBar(
         backgroundColor: Colors.grey[900],
         elevation: 0,
@@ -80,11 +82,6 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 visible: isVisibleError,
               ),
-              SizedBox(height:10),
-              Visibility(
-                child: spinner,
-                visible: isVisibleLoading,
-              )
             ],
 
           )

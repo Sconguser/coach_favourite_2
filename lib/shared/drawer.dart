@@ -81,8 +81,6 @@ class _CoachDrawerState extends State<CoachDrawer> {
           ListTile(
             tileColor: Colors.transparent,
             onTap: () async {
-              await Provider.of<MenteeProvider>(context, listen: false)
-                  .getMentees(provider.user.bearerToken);
               await Navigator.pushNamed(context, '/mentees_list');
             },
             title: Text(
@@ -135,8 +133,6 @@ class _MenteeDrawerState extends State<MenteeDrawer> {
           ListTile(
             tileColor: Colors.transparent,
             onTap: () async {
-              await Provider.of<CoachProvider>(context, listen: false)
-                  .getCoaches(provider.user.bearerToken);
               await Navigator.pushNamed(context, '/coaches_list');
             },
             title: Text(

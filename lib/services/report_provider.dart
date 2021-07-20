@@ -95,15 +95,12 @@ class ReportProvider extends ChangeNotifier{
           'Authorization': bearerToken
         },
       );
-      print('get reports');
-      print(response.statusCode);
       if(response.statusCode==200){
         _reportsList.clear();
         List reports = jsonDecode(response.body);
         reports.forEach((report)=>
         _reportsList.add(Report.fromJson(report))
         );
-        print(_reportsList.elementAt(0).date);
         notifyListeners();
         return _reportsList;
       }
