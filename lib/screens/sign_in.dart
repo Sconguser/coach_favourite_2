@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:coach_favourite/shared/constants.dart';
 import 'package:coach_favourite/shared/validators.dart';
@@ -13,6 +14,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  FirebaseAnalytics analytics = FirebaseAnalytics();
   final _storage = new FlutterSecureStorage();
   String email = '';
   String password = '';

@@ -7,8 +7,16 @@ import 'services/authorization.dart';
 import 'services/coach_provider.dart';
 import 'services/all_mentees_provider.dart';
 import 'services/report_provider.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+late FirebaseAnalytics analytics;
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  analytics = FirebaseAnalytics();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   runApp(MyApp());
 }
 
@@ -45,7 +53,6 @@ class MyApp extends StatelessWidget {
           title: 'Coach Favourite',
           theme: ThemeData(
             primarySwatch: Colors.grey,
-
             canvasColor: greyo,
             buttonColor: orango,
             appBarTheme: AppBarTheme(
