@@ -12,6 +12,13 @@ class ReportProvider extends ChangeNotifier{
   int get lastReportId =>_lastReportId;
   List<Report> _reportsList = [];
   List<Report> get reportsList => _reportsList;
+  Report _focusedReport = Report(id:-1, menteeId:-1, date:'');
+  Report get focusedReport => _focusedReport;
+
+  set setFocusedReport(report){
+    _focusedReport = report;
+    notifyListeners();
+  }
 
   Future<int>createReport(String bearerToken,int menteeId, double calf, double hips, double belly, double waist,
       double chest, double biceps,double weight, double height, String dietOpinion, String workoutOpinion) async{
