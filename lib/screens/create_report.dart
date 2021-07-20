@@ -54,7 +54,7 @@ class _CreateReportState extends State<CreateReport> {
               Dialog(
                   child: Container(
                 width: 500,
-                height: 600,
+                height: 680,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: FileImage(File(imageFile[index]!.path)),

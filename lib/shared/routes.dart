@@ -11,7 +11,7 @@ import 'package:coach_favourite/screens/mentee_detail.dart';
 import 'package:coach_favourite/screens/create_report.dart';
 import 'package:coach_favourite/screens/test.dart';
 import 'package:coach_favourite/screens/select_coaches.dart';
-
+import 'package:coach_favourite/screens/report_detail.dart';
 
 var myRoutes = <String,WidgetBuilder>{
   '/': (context) => SignIn(),
@@ -24,5 +24,6 @@ var myRoutes = <String,WidgetBuilder>{
   '/mentee_detail':(context)=>MenteeDetail(),
   '/create_report':(context)=>CreateReport(),
   '/test':(context)=>Test(),
-  '/select_coaches':(context)=>SelectCoaches()
+  '/select_coaches':(context)=>SelectCoaches(),
+  '/report_detail':(context)=>ReportDetail()
 };
