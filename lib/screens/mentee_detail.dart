@@ -97,7 +97,8 @@ class _MenteeDetailState extends State<MenteeDetail> {
                   width: 200,
                   child: InkWell(
                     onTap: () {
-                      print(index);
+                      reportProvider.setFocusedReport = reportsList.elementAt(index);
+                      Navigator.pushNamed(context, '/report_detail');
                     },
                     child: Container(
                       padding:
