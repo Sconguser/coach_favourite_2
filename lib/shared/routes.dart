@@ -15,6 +15,7 @@ import 'package:coach_favourite/screens/report_detail.dart';
 
 var myRoutes = <String,WidgetBuilder>{
   '/': (context) => SignIn(),
+  '/sign_in':(context)=>SignIn(),
   '/menu':(context) =>Menu(),
   '/sign_up':(context)=>SignUp(),
   '/edit_profile':(context)=>EditProfile(),

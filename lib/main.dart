@@ -1,3 +1,4 @@
+import 'package:coach_favourite/services/local_notification_service.dart';
 import 'package:coach_favourite/services/mentee_provider.dart';
 import 'package:coach_favourite/shared/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,20 @@ import 'services/report_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 late FirebaseAnalytics analytics;
+
+//receive message when app is in background
+Future<void>backgroundHandler(RemoteMessage message)async{
+  print(message.data.toString());
+  print(message.notification!.title);
+}
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   analytics = FirebaseAnalytics();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   runApp(MyApp());
 }
 
@@ -65,7 +73,7 @@ class MyApp extends StatelessWidget {
             dialogBackgroundColor: greyo,
             cardColor: greyo,
           ),
-          initialRoute: '/',
+          initialRoute: '/test',
         ),
       ),
     );
