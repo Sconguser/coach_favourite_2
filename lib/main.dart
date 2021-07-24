@@ -19,6 +19,9 @@ Future<void>backgroundHandler(RemoteMessage message)async{
   print(message.data.toString());
   print(message.notification!.title);
 }
+
+
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -29,6 +32,7 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -72,8 +76,9 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: greyo,
             dialogBackgroundColor: greyo,
             cardColor: greyo,
+            textTheme: TextTheme(subtitle1: TextStyle(color: orango))
           ),
-          initialRoute: '/test',
+          initialRoute: '/',
         ),
       ),
     );

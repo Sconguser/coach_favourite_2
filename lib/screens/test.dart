@@ -16,6 +16,7 @@ class _TestState extends State<Test> {
     super.initState();
     LocalNotificationService.initialize(context);
     AuthorizationProvider auth = Provider.of(context,listen:false);
+
     FirebaseMessaging.instance.getInitialMessage().then((message){
       if(message!=null){
         final routeFromMessage = message.data["route"];
